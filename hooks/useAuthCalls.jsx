@@ -32,21 +32,24 @@ const useAuthCalls = (navigation) => {
       const { data } = await axiosSimple.post(`/auth/register`, values);
     
       
-      navigation.navigate("Dashboard");
-    //   console.log(data);
+      setCurrentUser(data.username)
+      setCurrentId(data._id)
+    
+      navigation.goBack();
     } catch (error) {
     //   console.log(error);
   
       
     }
   };
-  const logout = async () => {
+  const logout =  () => {
 
     try {
-      await axiosWithToken.post(`/auth/logout`);
-      
+     
+      setCurrentUser("")
+      setCurrentId("")
     
-      navigation.navigate("Dashboard");
+      navigation.navigate("Tesla");
     } catch (error) {
       // console.log(error.message);
   

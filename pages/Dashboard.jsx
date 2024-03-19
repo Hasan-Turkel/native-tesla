@@ -1,11 +1,15 @@
 import { useCallback } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import useTeslaCalls from "../hooks/useTeslaCalls";
 import Card from "../components/blog/card";
+import { useAtomValue } from 'jotai'
 import { useFocusEffect } from "@react-navigation/native";
+import {username} from "../store/store"
 
 
 export const Dashboard = ({ navigation }) => {
+  const currentuser = useAtomValue(username)
+
   const { loading, err, data: cars, getCars } = useTeslaCalls();
   renderItem = ({ item }) => <Card car={item} navigation={navigation} />;
 
@@ -20,6 +24,14 @@ export const Dashboard = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList style={styles.list} data={cars} renderItem={renderItem} />
+      {!currentuser && (
+        <Button
+          title="Sign In"
+          color="black"
+          onPress={() => navigation.navigate("Login")}
+        />
+        
+      )}
     </View>
   );
 };
