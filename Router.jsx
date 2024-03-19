@@ -3,15 +3,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Dashboard } from './pages/Dashboard';
 import { Profile } from './pages/Profile';
-import { MyBlogs } from './pages/MyBlogs';
+import { MyOrders } from './pages/MyOrders';
 
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { Entypo } from '@expo/vector-icons';
+
 import { Text } from 'react-native';
-import { useSelector } from 'react-redux';
+
 import useAuthCalls from './hooks/useAuthCalls';
 import Detail from './pages/detail';
 import ToastManager from 'toastify-react-native';
@@ -48,7 +48,7 @@ function Home() {
 
 const Router = () => {
 
-  const { user } = useSelector((state) => state.auth)
+  const { user } = false
 
   return (
   <>
@@ -81,6 +81,7 @@ const Router = () => {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="Order" component={Order} />
+      <Stack.Screen name="MyOrders" component={MyOrders} />
     </Stack.Navigator>}
     </>
 

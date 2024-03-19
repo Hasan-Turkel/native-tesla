@@ -1,11 +1,16 @@
 import React from 'react'
 import { Button, Text, View } from 'react-native'
 import styles from "./Order.style";
+import {username} from "../../store/store"
+import { useAtomValue } from 'jotai';
+import useTeslaCalls from '../../hooks/useTeslaCalls';
 
 
 const Order = ({ route, navigation }) => {
 
     const {order} = route.params
+    const {sendOrder} = useTeslaCalls()
+    const currentuser = useAtomValue(username)
     const total = Object.values(order).filter((item)=>item.price&&item).reduce((t, {price}) => t + price, 0) + order.extras.reduce((t, {price}) => t + price, 0)
     
     //   console.log(total);
@@ -20,12 +25,20 @@ const Order = ({ route, navigation }) => {
         {order.steering.steeringname&&<Text>{order.steering.steeringname} {order.steering.price}$</Text>}
         {order.extras.map((item, i)=><Text key={i}>{item.choicename} {item.price}$</Text>)}
         <Text>Total Amount {total}$</Text>
-        <Button
-  onPress={() => navigation.navigate("Order", { order: chosen })}
+
+{currentuser?    <Button
+  onPress={() => {sendOrder({order:{...order, total:total, orderDate: new Date().toISOString().slice(0,10)}}); navigation.navigate("MyOrders") }}
   title="Order"
   color="#0d6efd"
   
-/>
+/>:        <Button
+  onPress={() => navigation.navigate("Login")}
+  title="Login for Order"
+  color="#0d6efd"
+  
+/>}
+    
+
     </View>
   )
 }

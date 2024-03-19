@@ -1,12 +1,10 @@
 import { useCallback, useState } from "react";
-import { useSelector } from "react-redux";
 import useTeslaCalls from "../../hooks/useTeslaCalls";
 import { Button, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import styles from "./Detail.style";
 
 const Detail = ({ route, navigation }) => {
-  const { user } = useSelector((state) => state.auth);
 
   const { loading, err, data: car, getDetailCar, chosen, setChosen, getExtras, extras } = useTeslaCalls();
 

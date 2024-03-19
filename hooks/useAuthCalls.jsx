@@ -1,53 +1,55 @@
-import { useDispatch } from "react-redux";
-import axios from "axios";
-import { fetchFail, fetchStart, loginSuccess, registerSuccess, logoutSuccess } from "../features/authSlice";
-import { Alert } from "react-native";
-
+import { username, id, token } from "../store/store";
+import useAxios from "./useAxios";
+import { useAtom } from 'jotai'
 
 
 const useAuthCalls = (navigation) => {
-  const dispatch = useDispatch();
-  const BASE_URL = "https://blogapp-fs-backend.vercel.app" 
+  const { axiosWithToken, axiosSimple } = useAxios();
+  const [currentuser, setCurrentUser] = useAtom(username)
+  const [currentid, setCurrentId] = useAtom(id)
+  const [currenttoken, setCurrentToken] = useAtom(token)
+
 
   const login = async (values) => {
-    dispatch(fetchStart());
+   
     try {
-      const { data } = await axios.post(`${BASE_URL}/users/auth/login/`, values);
-      dispatch(loginSuccess(data));
+      const  {data}  = await axiosSimple.post(`/auth/login`, values);
+      // console.log(data);
+      setCurrentUser(data.username)
+      setCurrentId(data._id)
     
-      navigation.navigate("Dashboard");
+      navigation.goBack();
     //   console.log(data);
     } catch (error) {
     //   console.log(error.message);
-      dispatch(fetchFail());
     
     }
   };
 
   const register = async (values) => {
-    dispatch(fetchStart());
+ 
     try {
-      const { data } = await axios.post(`${BASE_URL}/users/auth/register/`, values);
-      dispatch(registerSuccess(data));
+      const { data } = await axiosSimple.post(`/auth/register`, values);
+    
       
       navigation.navigate("Dashboard");
     //   console.log(data);
     } catch (error) {
     //   console.log(error);
-      dispatch(fetchFail());
+  
       
     }
   };
   const logout = async () => {
-    dispatch(fetchStart());
+
     try {
-      await axios.post(`${BASE_URL}/users/auth/logout/`);
-      dispatch(logoutSuccess());
+      await axiosWithToken.post(`/auth/logout`);
+      
     
       navigation.navigate("Dashboard");
     } catch (error) {
       // console.log(error.message);
-      dispatch(fetchFail());
+  
      
     }
   };
