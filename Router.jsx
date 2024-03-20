@@ -17,6 +17,7 @@ import Order from "./pages/order";
 
 import { username } from "./store/store";
 import { useAtomValue } from "jotai";
+import Compare from "./pages/Compare";
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -41,6 +42,7 @@ function Home() {
       <Stack.Screen name="Tesla" component={Dashboard} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="Order" component={Order} />
+      <Stack.Screen name="Compare" component={Compare} />
     </Stack.Navigator>
   );
 }
@@ -101,6 +103,7 @@ const Router = () => {
           <Stack.Screen name="Detail" component={Detail} />
           <Stack.Screen name="Order" component={Order} />
           <Stack.Screen name="MyOrders" component={MyOrders} />
+          <Stack.Screen name="Compare" component={Compare} />
         </Stack.Navigator>
       )}
     </>

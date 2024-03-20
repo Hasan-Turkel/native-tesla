@@ -37,6 +37,11 @@ const Order = ({ route, navigation }) => {
   color="#0d6efd"
   
 />}
+
+<Button
+  onPress={() => navigation.navigate("Compare", { order: {...order, total }})}
+  title="Compare"
+  color="#0d6efd"/>
     
 
     </View>
