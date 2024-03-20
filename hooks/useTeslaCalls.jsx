@@ -45,7 +45,7 @@ const useTeslaCalls = (navigation) => {
 
   const sendOrder = async (values) => {
     try {
-      const { data } = await axiosSimple.put(`/users/${currentId}`, values);
+      const { data } = await axiosWithToken.put(`/users/${currentId}`, values);
 
       // console.log(data);
     } catch (error) {
@@ -55,7 +55,7 @@ const useTeslaCalls = (navigation) => {
 
   const getMyOrders = async () => {
     try {
-      const { data } = await axiosSimple(`/users/${currentId}`);
+      const { data } = await axiosWithToken(`/users/${currentId}`);
       setData(data.userorders);
       // console.log(data);
     } catch (error) {

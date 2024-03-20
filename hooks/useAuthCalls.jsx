@@ -15,8 +15,9 @@ const useAuthCalls = (navigation) => {
     try {
       const  {data}  = await axiosSimple.post(`/auth/login`, values);
       // console.log(data);
-      setCurrentUser(data.username)
-      setCurrentId(data._id)
+      setCurrentUser(data.user.username)
+      setCurrentId(data.user._id)
+      setCurrentToken(data.token)
     
       navigation.goBack();
     //   console.log(data);
