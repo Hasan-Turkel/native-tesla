@@ -2,6 +2,7 @@ import { useState } from "react";
 import useAxios from "./useAxios";
 import { useAtomValue } from "jotai";
 import { id } from "../store/store";
+import { Alert } from "react-native";
 
 const useTeslaCalls = (navigation) => {
   const { axiosWithToken, axiosSimple } = useAxios();
@@ -56,6 +57,7 @@ const useTeslaCalls = (navigation) => {
       // console.log(data);
     } catch (error) {
       // console.log(error);
+      Alert.alert("The order couldn't be sent.")
     }
   };
 

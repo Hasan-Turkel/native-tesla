@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Button, FlatList, StyleSheet, Text, View } from "react-native";
 import useTeslaCalls from "../hooks/useTeslaCalls";
-import Card from "../components/blog/card";
+import Card from "../components/tesla/card";
 import { useAtomValue } from 'jotai'
 import { useFocusEffect } from "@react-navigation/native";
 import {username} from "../store/store"
@@ -20,7 +20,6 @@ export const Dashboard = ({ navigation }) => {
     }, [])
   );
 
-  // console.log(blogs);
   return (
     <View style={styles.container}>
       <FlatList style={styles.list} data={cars} renderItem={renderItem} />

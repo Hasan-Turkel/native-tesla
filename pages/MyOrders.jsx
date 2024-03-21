@@ -27,7 +27,6 @@ export const MyOrders = ({ navigation }) => {
     }, [])
   );
 
-  // console.log(blogs);
   return (
     <View style={styles.container}>
       <Text>

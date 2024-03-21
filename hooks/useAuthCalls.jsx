@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { username, id, token } from "../store/store";
 import useAxios from "./useAxios";
 import { useAtom } from 'jotai'
@@ -22,7 +23,8 @@ const useAuthCalls = (navigation) => {
       navigation.goBack();
     //   console.log(data);
     } catch (error) {
-    //   console.log(error.message);
+
+   Alert.alert("Login Failed")
     
     }
   };
@@ -33,12 +35,15 @@ const useAuthCalls = (navigation) => {
       const { data } = await axiosSimple.post(`/auth/register`, values);
     
       
-      setCurrentUser(data.username)
-      setCurrentId(data._id)
+      setCurrentUser(data.newUser.username)
+      setCurrentId(data.newUser._id)
+      setCurrentToken(data.token)
     
       navigation.goBack();
     } catch (error) {
-    //   console.log(error);
+      // console.log(values);
+
+    Alert.alert("Register Failed")
   
       
     }
@@ -49,10 +54,11 @@ const useAuthCalls = (navigation) => {
       const { data } = await axiosWithToken.post(`/auth/logout`);
       setCurrentUser("")
       setCurrentId("")
+      setCurrentToken("")
     
-      navigation.navigate("Tesla");
     } catch (error) {
       // console.log(error.message);
+      Alert.alert("Logout Failed")
   
      
     }

@@ -30,7 +30,7 @@ const RegisterForm = ({navigation}) => {
           }}
           validationSchema={registerSchema}
           onSubmit={(values, action) => {
-            register({ ...values, password2: values.password });
+            register(values);
             // console.log(values);
             action.resetForm();
             action.setSubmitting(false);
