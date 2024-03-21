@@ -9,7 +9,7 @@ import useTeslaCalls from '../../hooks/useTeslaCalls';
 const Order = ({ route, navigation }) => {
 
     const {order} = route.params
-    const {sendOrder} = useTeslaCalls()
+    const {sendOrder} = useTeslaCalls(navigation)
     const currentuser = useAtomValue(username)
     const total = Object.values(order).filter((item)=>item.price&&item).reduce((t, {price}) => t + price, 0) + order.extras.reduce((t, {price}) => t + price, 0)
     
@@ -27,7 +27,7 @@ const Order = ({ route, navigation }) => {
         <Text>Total Amount {total}$</Text>
 
 {currentuser?    <Button
-  onPress={() => {sendOrder({order:{...order, total:total, orderDate: new Date().toISOString().slice(0,10)}}); navigation.navigate("MyOrders") }}
+  onPress={() =>sendOrder({order:{...order, total:total, orderDate: new Date().toISOString().slice(0,10)}})}
   title="Order"
   color="#0d6efd"
   
