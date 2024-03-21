@@ -43,10 +43,10 @@ const useAuthCalls = (navigation) => {
       
     }
   };
-  const logout =  () => {
+  const logout = async() => {
 
     try {
-     
+      const { data } = await axiosWithToken.post(`/auth/logout`);
       setCurrentUser("")
       setCurrentId("")
     
